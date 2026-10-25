@@ -18,6 +18,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: project-bolt-sb1-dvdwxy92/project
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,10 +29,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-        
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build website
         run: npm run build
@@ -37,7 +39,7 @@ jobs:
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: project-bolt-sb1-dvdwxy92/project/dist
 
   deploy:
     environment:
@@ -49,3 +51,4 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
